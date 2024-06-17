@@ -9,7 +9,7 @@ const Genero = sequelize.define('Genero', {
     },
     nombre: {
         type: DataTypes.STRING(10)
-    }
+    },
 },{
     tableName: 'genero',
     timestamps: false

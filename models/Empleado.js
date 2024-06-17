@@ -1,7 +1,6 @@
 const sequelize = require('../config/database');
 const {DataTypes} = require('sequelize');
 const Usuario = require('./Usuario');
-const Cargo = require('./Cargo');
 
 const Empleado = sequelize.define('Empleado', {
     id_empleado: {
@@ -32,10 +31,11 @@ const Empleado = sequelize.define('Empleado', {
         type: DataTypes.STRING(100)
     },
     fecha_contrato: {
-        type: DataTypes.DATE
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW
     },
     genero: {
-        type: DataTypes.STRING(1)
+        type: DataTypes.STRING(10)
     },
     telefono: {
         type: DataTypes.NUMERIC(9, 0)
