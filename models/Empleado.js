@@ -1,18 +1,55 @@
-const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
+const {DataTypes} = require('sequelize');
+const Usuario = require('./Usuario');
+const Cargo = require('./Cargo');
 
 const Empleado = sequelize.define('Empleado', {
-  nombre: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  cargo: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-}, {
-  tableName: 'empleados',
-  timestamps: false,
+    id_empleado: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true
+    },
+    dni: {
+        type: DataTypes.NUMERIC(8, 0),
+        unique: true
+    },
+    nombre_pri: {
+        type: DataTypes.STRING(50)
+    },
+    nombre_seg: {
+        type: DataTypes.STRING(50)
+    },
+    apellido_pat: {
+        type: DataTypes.STRING(50)
+    },
+    apellido_mat: {
+        type: DataTypes.STRING(50)
+    },
+    cargo: {
+        type: DataTypes.STRING(100),
+    },
+    correo: {
+        type: DataTypes.STRING(100)
+    },
+    fecha_contrato: {
+        type: DataTypes.DATE
+    },
+    genero: {
+        type: DataTypes.STRING(1)
+    },
+    telefono: {
+        type: DataTypes.NUMERIC(9, 0)
+    },
+    id_usuario: {
+        type: DataTypes.INTEGER,
+        references: {
+            model: Usuario,
+            key: 'id_usuario'
+        }
+    }
+},{
+    tableName: 'empleado',
+    timestamps: false
 });
 
 module.exports = Empleado;

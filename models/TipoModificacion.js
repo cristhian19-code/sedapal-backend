@@ -1,18 +1,18 @@
 const {DataTypes} = require("sequelize");
 const sequelize = require("../config/database");
 
-const Localizacion = sequelize.define('Localizacion', {
-    id_localizacion: {
+const TipoModificacion = sequelize.define('TipoModificacion', {
+    id_tipo_modificacion: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
     },
-    urbanizacion: {
+    nombre_modificacion: {
         type: DataTypes.STRING(10)
     }
 },{
-    tableName: 'localizacion',
+    tableName: 'tipo_modificacion',
     timestamps: false
 });
 
-module.exports = Localizacion;
+module.exports = TipoModificacion;

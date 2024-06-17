@@ -1,18 +1,18 @@
 const {DataTypes} = require("sequelize");
 const sequelize = require("../config/database");
 
-const Localizacion = sequelize.define('Localizacion', {
-    id_localizacion: {
+const Genero = sequelize.define('Genero', {
+    id_genero: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
     },
-    urbanizacion: {
+    nombre: {
         type: DataTypes.STRING(10)
     }
 },{
-    tableName: 'localizacion',
+    tableName: 'genero',
     timestamps: false
 });
 
-module.exports = Localizacion;
+module.exports = Genero;

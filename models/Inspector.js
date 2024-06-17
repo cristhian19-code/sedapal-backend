@@ -1,14 +1,18 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
+const {DataTypes} = require("sequelize");
+const sequelize = require("../config/database");
 
 const Inspector = sequelize.define('Inspector', {
-  nombre: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-}, {
-  tableName: 'inspectores',
-  timestamps: false,
+    id_inspectores: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+    },
+    cantidad: {
+        type: DataTypes.INTEGER,
+    }
+},{
+    tableName: 'inspector',
+    timestamps: false
 });
 
 module.exports = Inspector;
