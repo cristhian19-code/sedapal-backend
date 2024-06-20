@@ -7,12 +7,6 @@ router.get('/', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-    const findTipoModificacion = await TipoModificacion.findOne({ where: { id_tipo_modificacion: req.body.id_tipo_modificacion } });
-
-    if (findTipoModificacion) {
-        return res.status(400).json({ error: 'El tipo de modificación ya está registrado' });
-    }
-
     await TipoModificacion.create(req.body);
 
     res.json({ status: 'Tipo de modificación registrado' });
