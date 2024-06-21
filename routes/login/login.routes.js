@@ -6,15 +6,16 @@ const bcrypt = require('bcryptjs');
 const SECRET_KEY = 'SAJHDAS_3124ASFDSA';
 
 router.post('/', async (req, res) => {
-    const user = await  Usuario.findOne({ where: { username: req.body.username } });
+    const user = await Usuario.findOne({ where: { username: req.body.username } });
     if (!user) {
-        return res.status(400).json({ error: 'Usuario no registrado' });
+        return res.status(400).json({ status: 'Usuario no registrado' });
     }
 
 
-    const validPassword = bcrypt.compare(req.body.contrasenia, user.contrasenia);
+    const validPassword = await bcrypt.compare(req.body.contrasenia, user.contrasenia);
+
     if (!validPassword) {
-        return res.status(400).json({ error: 'Contraseña incorrecta' });
+        return res.status(400).json({ status: 'Contraseña incorrecta' });
     }
 
     const token = jwt.sign({
@@ -22,7 +23,7 @@ router.post('/', async (req, res) => {
         username: user.username
     }, SECRET_KEY);
 
-    res.json({token,});
+    res.json({ token, status: `Bienvenido ${user.username}` });
 })
 
 router.get('/verify', async (req, res) => {
