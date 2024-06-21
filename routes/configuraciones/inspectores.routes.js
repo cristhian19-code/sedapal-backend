@@ -19,6 +19,19 @@ router.post('/', async (req, res) => {
     res.json({ status: 'Inspector registrado' });
 })
 
+router.post('/validate', async (req, res) => {
+    const numero = Number(req.body.numero);
+    const inspectores = await Inspector.findAll();
+    const inspector = inspectores[0];
+
+    if (!inspector) return res.json({ status: 'No hay inspectores' });
+
+
+    if (inspector.cantidad < numero) return res.status(400).json({ status: 'No hay suficientes inspectores' });
+
+    res.json({ status: 'Inspectores disponibles' });
+})
+
 router.delete('/:id', async (req, res) => {
     await Inspector.destroy({
         where: { id_inspectores: req.params.id }

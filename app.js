@@ -22,15 +22,23 @@ app.use('/empleados', require('./routes/configuraciones/empleados.routes.js'))
 app.use('/estado-civil', require('./routes/configuraciones/estado-civil.routes.js'))
 app.use('/generos', require('./routes/configuraciones/generos.routes.js'))
 app.use('/inspectores', require('./routes/configuraciones/inspectores.routes.js'))
-app.use('/login', require('./routes/configuraciones/login.routes.js'))
 app.use('/nivel-socioeconomico', require('./routes/configuraciones/nivel-socioeconomico.routes.js'))
 app.use('/predio-categoria', require('./routes/configuraciones/predio-categoria.routes.js'))
 app.use('/revision-estado', require('./routes/configuraciones/revision-estado.routes.js'))
 app.use('/tipo-modificaciones', require('./routes/configuraciones/tipo-modificaciones.routes.js'))
 app.use('/usuarios', require('./routes/configuraciones/usuarios.routes.js'))
+// 
+app.use('/login', require('./routes/login/login.routes.js'))
+// 
+app.use('/predios', require('./routes/datos-maestros/predio.routes.js'))
+app.use('/clientes', require('./routes/datos-maestros/cliente.routes.js'))
+app.use('/conexiones', require('./routes/datos-maestros/conexion.routes.js'))
+// 
+app.use('/actividades', require('./routes/campania/actividades.routes.js'))
+app.use('/campanias', require('./routes/campania/campania.routes.js'))
 
 // Sincronización de base de datos y arranque del servidor
-sequelize.sync({ force: false }).then(() => {
+sequelize.sync({ force: false, alter: true }).then(() => {
   app.listen(3000, () => {
     console.log('Servidor ejecutándose en el puerto 3000');
   });

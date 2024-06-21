@@ -14,8 +14,13 @@ const NivelSocieconomico = require('./NivelSocieconomico');
 const PredioCategoria = require('./PredioCategoria');
 const RevisionEstado = require('./RevisionEstado');
 const TipoModificacion = require('./TipoModificacion');
+const Cliente = require('./Cliente');
+const CampaniaCatastral = require('./CampaniaCatastral');
+const Actividades = require('./Actividades');
 
 Empleado.belongsTo(Usuario, { foreignKey: 'id_usuario' });
+CampaniaCatastral.belongsTo(Empleado, { foreignKey: 'id_empleado' });
+Actividades.belongsTo(CampaniaCatastral, { foreignKey: 'id_campania' });
 
 module.exports = {
   sequelize,
@@ -33,5 +38,7 @@ module.exports = {
   NivelSocieconomico,
   PredioCategoria,
   RevisionEstado,
-  TipoModificacion
+  TipoModificacion,
+  Cliente,
+  CampaniaCatastral
 };
