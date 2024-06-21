@@ -3,7 +3,12 @@ const CampaniaCatastral = require('../../models/CampaniaCatastral');
 
 router.get('/', async (req, res) => {
     const campaniasCatastrales = await CampaniaCatastral.findAll();
-    res.json(campaniasCatastrales);
+    const newList = campaniasCatastrales.map(campaniaCatastral => ({
+        ...campaniaCatastral.dataValues,
+        fecha_inicio: campaniaCatastral.fecha_inicio.toISOString().split('T')[0],
+        fecha_fin: campaniaCatastral.fecha_fin.toISOString().split('T')[0],
+    }));
+    res.json(newList);
 })
 
 router.post('/', async (req, res) => {
