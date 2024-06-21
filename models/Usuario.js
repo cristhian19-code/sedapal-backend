@@ -12,7 +12,7 @@ const Usuario = sequelize.define('Usuario', {
     unique: true,
   },
   contrasenia: {
-    type: DataTypes.STRING()
+    type: DataTypes.STRING(50)
   }
 },{
   tableName: 'usuario',

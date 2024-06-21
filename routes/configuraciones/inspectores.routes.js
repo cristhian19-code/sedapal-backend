@@ -1,6 +1,7 @@
 const router = require('express').Router();
 
 const Inspector = require('../../models/Inspector');
+const CampaniaCatastral = require('../../models/CampaniaCatastral');
 
 router.get('/', async (req, res) => {
     const inspectores = await Inspector.findAll();
@@ -26,8 +27,13 @@ router.post('/validate', async (req, res) => {
 
     if (!inspector) return res.json({ status: 'No hay inspectores' });
 
+    const campanias = await CampaniaCatastral.findAll();
 
-    if (inspector.cantidad < numero) return res.status(400).json({ status: 'No hay suficientes inspectores' });
+    const num_inspectores_campanias =
+
+        campanias.reduce((acc, campania) => acc + Number(campania.inspectores_campania), 0);
+
+    if (inspector.cantidad - num_inspectores_campanias < numero) return res.status(400).json({ status: 'No hay suficientes inspectores' });
 
     res.json({ status: 'Inspectores disponibles' });
 })

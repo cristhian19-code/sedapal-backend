@@ -17,6 +17,34 @@ router.post('/', async (req, res) => {
     res.json({ status: 'Campaña catastral registrada', id: data.id_campania });
 })
 
+router.put('/aceptar/:id', async (req, res) => {
+    const campaniaCatastral = await CampaniaCatastral.findByPk(req.params.id);
+
+    if (!campaniaCatastral) {
+        return res.status(404).json({ error: 'La campaña catastral no existe' });
+    }
+
+    await CampaniaCatastral.update({ estado: 'Aceptar' }, {
+        where: { id_campania: req.params.id }
+    });
+
+    res.json({ status: 'Campaña catastral Aceptada' });
+})
+
+router.put('/rechazar/:id', async (req, res) => {
+    const campaniaCatastral = await CampaniaCatastral.findByPk(req.params.id);
+
+    if (!campaniaCatastral) {
+        return res.status(404).json({ error: 'La campaña catastral no existe' });
+    }
+
+    await CampaniaCatastral.update({ estado: 'Rechazado' }, {
+        where: { id_campania: req.params.id }
+    });
+
+    res.json({ status: 'Campaña catastral Rechazada' });
+})
+
 router.put('/:id', async (req, res) => {
     const campaniaCatastral = await CampaniaCatastral.findByPk(req.params.id);
 

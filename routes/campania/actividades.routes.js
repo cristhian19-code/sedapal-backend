@@ -1,18 +1,19 @@
 const router = require('express').Router();
 const Actividades = require('../../models/Actividades');
 
-router.get('/', async (req, res) => {
-    const actividades = await Actividades.findByPk(req.body.id_campania);
-    res.json(actividades);
+router.post('/listar', async (req, res) => {
+    const actividades = await Actividades.findAll({
+        where: { id_campania: req.body.id_campania }
+    });
+
+    const actividadesArray = actividades.map(actividad => ({
+        ...actividad.dataValues,
+        fecha: actividad.dataValues.fecha.toISOString().split('T')[0]
+    }));
+    res.json(actividadesArray);
 })
 
 router.post('/', async (req, res) => {
-    const findActividad = await Actividades.findByPk(req.body.id_actividad);
-
-    if (findActividad) {
-        return res.status(400).json({ error: 'La actividad ya está registrada' });
-    }
-
     await Actividades.create(req.body);
 
     res.json({ status: 'Actividad registrada' });
