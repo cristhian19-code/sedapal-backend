@@ -25,7 +25,7 @@ router.post('/validate', async (req, res) => {
     const inspectores = await Inspector.findAll();
     const inspector = inspectores[0];
 
-    if (!inspector) return res.json({ status: 'No hay inspectores' });
+    if (!inspector) return res.status(400).json({ status: 'No hay inspectores' });
 
     const campanias = await CampaniaCatastral.findAll();
 

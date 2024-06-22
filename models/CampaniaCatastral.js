@@ -9,6 +9,9 @@ const CampaniaCatastral = sequelize.define('CampaniaCatastral', {
         autoIncrement: true,
         primaryKey: true
     },
+    nombre: {
+        type: DataTypes.STRING(100)
+    },
     inspectores_campania: {
         type: DataTypes.NUMERIC(4, 0)
     },
